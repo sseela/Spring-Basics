@@ -1,0 +1,50 @@
+<!-- <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+			"http://www.springframework.org/dtd/spring-beans-2.0.dtd"> -->
+			
+			
+<!-- dtd works only for creating default list as ArrayList, set as LinkedHashSet, map as LinkedHashMap-->
+	<!-- Hence we should go for schema to create inject collection objects other than default as above -->
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+	<bean id="car" class="beans.Car">
+		<property name="price" value="200000"/>
+		<property name="engine" ref="e"/>
+		<property name="carMap">
+			<util:map map-class="java.util.TreeMap">
+				<entry key="Innova" value="800000"/>
+				<entry key="Scorpio" value="700000"/>
+				<!-- <entry key="" value-ref=""/> -->
+			</util:map>
+		</property>
+		<property name="engineSet">
+			<util:set set-class="java.util.TreeSet">
+				<!-- <value></value> -->
+				<ref bean="e"/>
+				<ref bean="e2"/>
+			</util:set>
+		</property>
+		<property name="carList">
+			<util:list list-class="java.util.LinkedList">
+				<value>Inn</value>
+				<value>Scor</value>
+			</util:list>
+		</property>
+	</bean>
+	
+	<bean id="e" class="beans.Engine">
+		<property name="model" value="2019"/>
+	</bean>
+	<bean id="e2" class="beans.Engine">
+		<property name="model" value="2020"/>
+	</bean>
+
+
+	
+</beans> 
