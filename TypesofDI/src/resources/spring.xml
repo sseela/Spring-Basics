@@ -1,0 +1,26 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+			"http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+			
+<beans>
+
+	<!-- setter DI -->
+	<!-- <bean id="car" class="beans.Car" scope="singleton">
+		<property name="price" value="200000"/>
+		<property name="engine" ref="e"/>
+	</bean>
+	
+	<bean id="e" class="beans.Engine">
+		<property name="model" value="2019"/>
+	</bean> -->
+
+
+	<!-- constructor DI -->
+	<bean id="car" class="beans.Car">
+		<constructor-arg ref="e" type="beans.Engine" index="0"/>
+		<constructor-arg value="300000" type="int" index="1"/>
+	</bean>
+	
+	<bean id="e" class="beans.Engine">
+		<constructor-arg value="2019"/>
+	</bean>
+</beans>

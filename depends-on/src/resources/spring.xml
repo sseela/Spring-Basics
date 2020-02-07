@@ -1,0 +1,16 @@
+<!-- if we want one object to be created before other object is created, then we should go for depends-on attribute for bean tag.
+It will make sure that one object will be created before creating other one. -->
+		
+<beans xmlns = "http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="a" class="beans.A" depends-on="b"> 
+		
+	</bean>
+	<bean id="b" class="beans.B" depends-on="c"></bean>
+	<bean id="c" class="beans.C"></bean>
+</beans>
