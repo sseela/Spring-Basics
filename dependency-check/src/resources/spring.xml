@@ -1,0 +1,21 @@
+<!-- if we inject dependencies using constructor, then it is mandatory to inject those dependencies bcoz we have to create object with that param constructor itself -->
+<!-- but if it is setter DI, then it is not mandatory to inject all the dependencies, hence to make it mandatory, we have to go for dependency-check for setter injection -->	
+<!-- dependency-check values can be none, simple, objects, all. We use them depending on which variables we want to inject -->
+		
+<beans xmlns = "http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="car" class="beans.Car" dependency-check="all">
+		<property name="price" value="2342333"/>
+		<property name="engine" ref="e"/>
+	</bean>
+	
+	<bean id="e" class="beans.Engine" dependency-check="simple">
+		<property name="model" value="2018"/>
+	</bean>
+</beans>
