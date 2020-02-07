@@ -1,0 +1,53 @@
+<!-- Autowire - Auto DI. Auto DI will be done only for secondary types. For primitives, Auto DI is not applicable. We have to manually inject primitive types by property tag-->
+
+<!-- Types:
+	1. byType: auto DI will be done for beans which has respective setters. While creating bean, it will check the type of class only. If two or more beans are present with class names, then ambuiguity arises, hence in that case we have to use autowire-candidate="false" to solve that ambuiguity.
+	2. byName: auto DI will be done based on type and if one or more same types are instantiated, then by Name(by reference) it will search.
+				There will be no ambiguity if we use byName.(byType and then byName)
+	3. constructor: byType and then byName
+	4. autodetect : If we are not sure whether param. constructor or setter is present for DI, then we can use autodetect autowire type for DI. If no arg constructor is present then it will create object and do setter DI and if only param. constructor is present then DI through constructor will be done.-->
+
+<!-- setter DI: byType, byName
+constructor DI: constructor
+setter and constructor DI: autodetect -->
+
+
+
+
+<!-- Now the dependencies are injected with the help of autowiring(either by autowire in xml or @Autowired annotation). 
+But for both of these, we have to create main bean object on our own with <bean id class></bean>. But Ioc will reduce this work
+also by stereo type annotations that can be used on beans.
+
+StereoType annotations:
+1. @Controller - for controller classes
+2. @Service - for Business classes
+3. @Repository - for DAO classes
+4. @Component - for other than Spring MVC classes like utility, assemblers, dto's, vm's,....
+ -->
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+	<context:annotation-config/>
+	<!-- <context:component-scan base-package="beans"></context:component-scan> -->
+
+	<bean id="car" class="beans.Car">
+		<property name="price" value="209933"/>
+	</bean>
+	
+	<bean id="e1" class="beans.Engine">
+		<property name="model" value="2018"/>
+	</bean>
+	
+	<bean id="e2" class="beans.Engine">
+		<property name="model" value="2018"/>
+	</bean>
+
+</beans>
